@@ -4,7 +4,7 @@ Send Laravel logs to Telegram via Bot API.
 
 ## Installation
 ```bash
-composer require yourvendor/telegram-logger
+composer require harbecox/telegram-logger
 ```
 
 ## Configuration
@@ -27,7 +27,7 @@ TELEGRAM_LOG_ASYNC=false
 'channels' => [
     'telegram' => [
         'driver' => 'custom',
-        'via' => \YourVendor\TelegramLogger\TelegramLogger::class,
+        'via' => \harbecox\TelegramLogger\TelegramLogger::class,
         'level' => config('telegram-logger.level'),
         'token' => config('telegram-logger.token'),
         'chat_id' => config('telegram-logger.chat_id'),
