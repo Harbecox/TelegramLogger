@@ -4,7 +4,15 @@ Send Laravel logs to Telegram via Bot API.
 
 ## Installation
 ```bash
-composer require harbecox/telegram-logger
+"repositories": {
+        "telegram-logger": {
+            "type": "vcs",
+            "url": "https://github.com/Harbecox/TelegramLogger"
+        }
+    }
+    
+    
+composer require harbecox/telegram-logger:dev-main
 ```
 
 ## Configuration

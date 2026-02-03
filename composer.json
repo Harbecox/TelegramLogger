@@ -18,13 +18,13 @@
   },
   "autoload": {
     "psr-4": {
-      "harbecox\\TelegramLogger\\": "src/"
+      "Harbecox\\TelegramLogger\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "harbecox\\TelegramLogger\\TelegramLoggerServiceProvider"
+        "Harbecox\\TelegramLogger\\TelegramLoggerServiceProvider"
       ]
     }
   },

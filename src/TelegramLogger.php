@@ -1,6 +1,6 @@
 <?php
 
-namespace harbecox\TelegramLogger;
+namespace Harbecox\TelegramLogger;
 
 use Monolog\Logger;
 
@@ -8,6 +8,7 @@ class TelegramLogger
 {
     /**
      * Create a custom Monolog instance.
+     * @throws \Exception
      */
     public function __invoke(array $config): Logger
     {

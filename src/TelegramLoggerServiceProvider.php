@@ -1,6 +1,6 @@
 <?php
 
-namespace harbecox\TelegramLogger;
+namespace Harbecox\TelegramLogger;
 
 use Illuminate\Support\ServiceProvider;
 
