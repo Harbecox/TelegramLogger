@@ -75,10 +75,9 @@ class TelegramLogHandler extends AbstractProcessingHandler
         $message .= " | {$record->datetime->format('Y-m-d H:i:s')}";
 
         $message .= "\n\n";
-        $message .= "<b>Message:</b> " . htmlspecialchars($record->message) . "\n";
+        $message .= htmlspecialchars($record->message) . "\n";
 
         if (!empty($record->context)) {
-            $message .= "\n<b>Context:</b>\n";
             $message .= "<pre>" . htmlspecialchars(
                     json_encode($record->context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
                 ) . "</pre>\n";
