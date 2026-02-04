@@ -72,6 +72,8 @@ class TelegramLogHandler extends AbstractProcessingHandler
             $message .= " | {$this->appName}";
         }
 
+        $message .= " | {$record->datetime->format('Y-m-d H:i:s')}";
+
         $message .= "\n\n";
         $message .= "<b>Message:</b> " . htmlspecialchars($record->message) . "\n";
 
@@ -89,8 +91,6 @@ class TelegramLogHandler extends AbstractProcessingHandler
             }
             $message .= "\n";
         }
-
-        $message .= "\n<b>Time:</b> {$record->datetime->format('Y-m-d H:i:s')}";
 
         if (isset($record->extra['url'])) {
             $message .= "\n<b>URL:</b> {$record->extra['url']}";
