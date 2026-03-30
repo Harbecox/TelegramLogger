@@ -32,30 +32,43 @@ class TelegramLogHandler extends AbstractProcessingHandler
     }
 
     protected function write(LogRecord $record): void
-    {
-        try {
-            $message = $this->formatMessage($record);
+{
+    try {
+        $message = $this->formatMessage($record);
 
-            $payload = [
-                'chat_id' => $this->chatId,
-                'text' => $message,
-                'parse_mode' => 'HTML',
-                'disable_web_page_preview' => true,
-            ];
+        $chatId = $this->chatId;
+        $threadId = null;
 
-            if ($this->async) {
-                Http::async()
-                    ->timeout(5)
-                    ->post($this->getApiUrl(), $payload);
-            } else {
-                Http::timeout(5)
-                    ->post($this->getApiUrl(), $payload);
-            }
-        } catch (Exception $e) {
-            // Не прерываем выполнение приложения при ошибке отправки
-            // Можно логировать в другой канал, если нужно
+        // 👉 поддержка топиков: формат chat_id = "-100..._12345"
+        if (str_contains($chatId, '_')) {
+            [$chatId, $threadId] = explode('_', $chatId, 2);
+            $threadId = (int) $threadId;
         }
+
+        $payload = [
+            'chat_id' => $chatId,
+            'text' => $message,
+            'parse_mode' => 'HTML',
+            'disable_web_page_preview' => true,
+        ];
+
+        // 👉 если есть топик — добавляем
+        if ($threadId) {
+            $payload['message_thread_id'] = $threadId;
+        }
+
+        if ($this->async) {
+            Http::async()
+                ->timeout(5)
+                ->post($this->getApiUrl(), $payload);
+        } else {
+            Http::timeout(5)
+                ->post($this->getApiUrl(), $payload);
+        }
+    } catch (Exception $e) {
+        // не ломаем приложение
     }
+}
 
     protected function getApiUrl(): string
     {
